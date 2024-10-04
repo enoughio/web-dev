@@ -10,22 +10,22 @@ const recipeJSON =
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({ extended: true }));
 
-let data;
+let data = 'jj' ;
 
 app.get("/", (req, res) => {
-  res.render("index.ejs", { recipe: data });
+  res.render("solution.ejs", { recipe: data });
 });
 
-app.post("/recipe", (req, res) => {
+app.post("/recipe", async (req, res) => {
   switch (req.body.choice) {
     case "chicken":
-      data = JSON.parse(recipeJSON)[0];
+      data =  await JSON.parse(recipeJSON)[0];
       break;
     case "beef":
-      data = JSON.parse(recipeJSON)[1];
+      data = await JSON.parse(recipeJSON)[1];
       break;
     case "fish":
-      data = JSON.parse(recipeJSON)[2];
+      data = await JSON.parse(recipeJSON)[2];
       break;
     default:
       break;

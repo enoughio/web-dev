@@ -1,24 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <style>
-    .main{
-      height: 40vh;
-      width: 70vw;
-      margin: 20%;
-      padding: 15px;
-      display: flex;
-      background-color: aquamarine;
-    }
-  </style>
+  <link rel="stylesheet" href="/styles/main.css">
+  <title>I'm Bored</title>
 </head>
+
 <body>
-  <div class="main">
-    <h1>Lets find someting for you to do 👍</h1>
-    <form action="/filter" method="get">
+  <div class="container">
+    <h1>Let's find something for you to do ✌️</h1>
+
+    <form action="/" id="form" class="form" method="POST">
       <select name="type" class="form-select">
         <option value="" data-display="Select">Random type</option>
         <option value="education">Education</option>
@@ -37,14 +31,42 @@
         <option value="3">3</option>
         <option value="4">4</option>
       </select>
-      <button type="submit">submit</button>
+      <button type="submit" class="form-submit">Go</button>
     </form>
+    <section id="cards" class="cards">
+      <%if(locals.data){%>
+      <article class="card-item">
+        <h2 class="card-activity">
+          <%= data.activity %>
+          <!-- Show Activity -->
+        </h2>
+        <div class="card-info">
+          <span class="card-type">
+            <!-- Show Activity type -->
+          <%= data.type %>
+             
+          </span>
+          <span class="card-participants">
+          <%= data.participants %>
+            <!-- participants: Show participant number -->
+            <span class="card-number">
+          <%= data.accessibility %>
+            </span>
+          </span>
+        </div>
+      </article>
 
-    <% if(locals.data){%>
-    <h1>data.</h1> 
-    <%}%>
-  
+      <% } if(locals.error) {%>
+
+      <div id="tag-error" class="tag-error">
+        <!-- Show any errors that were sent from the backend -->
+         <%= error%>
+      </div>
+      <%}%>
+
+    </section>
   </div>
 
 </body>
+
 </html>

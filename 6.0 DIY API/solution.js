@@ -64,12 +64,10 @@ app.patch("/jokes/:id", (req, res) => {
     jokeText: req.body.text || existingJoke.jokeText,
     jokeType: req.body.type || existingJoke.jokeType,
   };
-
   const searchIndex = jokes.findIndex((joke) => joke.id === id);
   jokes[searchIndex] = replacementJoke;
   console.log(jokes[searchIndex]);
   res.json(replacementJoke);
-
 });
 
 //DELETE Specific joke
@@ -86,7 +84,6 @@ app.delete("/jokes/:id", (req, res) => {
       .status(404)
       .json({ error: `Joke with id: ${id} not found. No jokes were deleted.` });
   }
-
 });
 
 //DELETE All jokes
@@ -101,7 +98,6 @@ app.delete("/all", (req, res) => {
       .json({ error: `You are not authorised to perform this action.` });
   }
 });
-
 
 app.listen(port, () => {
   console.log(`Successfully started server on port ${port}.`);

@@ -6,24 +6,28 @@
 
 import inquirer from 'inquirer';
 import qr from 'qr-image';
+import fs from "node:fs"
+
 
 inquirer
- .prompt([{
-        message: 'enter URL',
-        name: 'URL',
-    }])
- .then((answer)=> {
-    var url = answer.URL;
-    var qr_svg = qr.image(url);
+  .prompt([
+    /* Pass your questions in here */
+    "what is data : "
+  ])
+  .then((answers) => {
+      console.log(answers);
+    // Use user feedback for... whatever!!
+  })
+  .catch((error) => {
+    if (error.isTtyError) {
+      console.log("error")
+      // Prompt couldn't be rendered in the current environment
+    } 
+  });
 
-    qr_svg.pipe(fs.createWriteStream('i_love_qr.svg'));
 
-    fs.writeFile('qr.txt', url, (error)=> {
-        if(error) throw error;
-
-        console.log('file saved');
-    });
- })
- .catch((error)=> {
-    console.log("Please run directly in terminal");
- });
+ 
+  var qr_svg = qr.image('I  QR!', { type: 'svg' });
+  qr_svg.pipe(fs.createWriteStream('i_love_qr.svg'));
+   
+//   var svg_string = qr.imageSync('I love QR!', { type: 'svg' });

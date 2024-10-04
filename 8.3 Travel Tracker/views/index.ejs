@@ -375,10 +375,53 @@
   </h2>
   <script>
     const country_codes = "<%= countries %>".split(",") 
-    console.log(typeof ("<%= countries %>"))
+    // console.log("<%= countries %>")
     country_codes.forEach(code => {
       document.getElementById(code).style.fill = 'teal'
     });
+
+    // some exp
+    
+//     const paths = document.querySelectorAll(".ag-canvas_svg path");
+//     const showData = (element)=>{
+//       element.style.fill = "red";
+//         // const data = fetch(`/data?id=${element.id}`);
+//         // console.log(data)
+//     }
+//     paths.forEach((path) => { path.addEventListener("onClick", ()=>{showData(path)} )}
+// );
+
+const paths = document.querySelectorAll(".ag-canvas_svg path");
+
+const showData = async (element) => {
+  // Change the fill color to red
+  element.style.fill = "red";
+  
+  // try {
+  //   // Fetch data based on the ID of the clicked element
+  //   const response = await fetch(`/data?id=${element.id}`);
+    
+  //   // Check if the response is ok (status 200)
+  //   if (response.ok) {
+  //     // const data = await response.json();
+  //     console.log(response); // Log the fetched data
+  //     // You can also update the UI with this data if desired
+  //   } else {
+  //     console.error("Error fetching data:", response.statusText);
+    // }
+  // } catch (error) {
+  //   console.error("Fetch error:", error);
+  // }
+};
+
+// Add event listeners to each path for the click event
+paths.forEach((path) => {
+  path.addEventListener("mouseover", () => {
+    console.log("clickef")
+    path.style.fill = "red";
+    // showData(path);
+  });
+});
 
   </script>
 </body>

@@ -1,0 +1,14 @@
+{
+  "name": "webauth",
+  "version": "1.0.0",
+  "description": "finger and face auth",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2"
+  }
+}

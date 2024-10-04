@@ -7,38 +7,48 @@ import express from "express";
 import { dirname }  from "path";
 import { fileURLToPath }  from "url";
 import bodyParser from "body-parser";
+import { connected } from "process";
 
+const app = express()
+const __dir = dirname(fileURLToPath(import.meta.url));
+let isAuth = false;
 
-const app = express();
-const port = 3000;
-const __dirname = dirname(fileURLToPath(import.meta.url));
-app.use(bodyParser.urlencoded({ extended: true }));
+function checkuser(req,res, next) {
 
-const password = "iloveprograming";
+    if(req.body.password == "ilove")
+      {  isAuth = true;
+      } 
+      else
+        res.send("goo")
 
-function check(n)
-{
-  if( n == password )
-  {
-    res.sendFile(__dirname+"/public/secret.html");
-  }
-  else
-  {
-     res.redirect("/");
-  }
+    console.log("in middleware")
+    next()
 }
 
-app.get(
-  "/", (req, res) => {
-    res.sendFile(__dirname+"/public/index.html");
-  }
-)
+app.use(bodyParser.urlencoded({extended: true}))
+app.use(checkuser);
 
-app.post( "/check", (req,res)=>{
-     const result = req.body.password;
-     check(result);
-}
-)
-app.listen(port, () => {
-  console.log(`Listening on port ${port}`);
+
+
+app.get("/", (req, res) => {
+  res.sendFile( __dir+"/public/index.html")
 });
+
+
+app.post("/check", (req,res) =>{
+    console.log(req.body.password+"in check")
+
+    if(isAuth == true)
+        res.sendFile(__dir+"secret.html")
+    else
+        res.redirect("/");
+})
+
+
+app.listen(3000, (req, res) =>{
+    console.log("on the go ")
+   // console.log(__dir+"/public/index.html")
+})
+
+
+

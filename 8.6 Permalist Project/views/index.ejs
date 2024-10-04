@@ -1,11 +1,9 @@
 <%- include('partials/header.ejs'); -%>
 
   <div class="box" id="heading">
-
-    <form action="/title" method="post">
-      <input  type="text" name="title" value=" <%= listTitle %>">
-    </form>
-
+    <h1>
+      <%= listTitle %>
+    </h1>
   </div>
   <div class="box">
     <% for(let item of listItems){%>
@@ -35,8 +33,6 @@
           <button class="add" type="submit" name="list" value=<%=listTitle %> >+</button>
         </form>
   </div>
-
-
 
   <script>
     function handler(id) {

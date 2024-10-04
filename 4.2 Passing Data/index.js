@@ -11,16 +11,20 @@ app.get("/", (req, res) => {
 });
 
 
-app.post("/submit", (req, res) => {
+app.post("/submit", (req, res) =>{
+  var fname = req.body.fName;
+  var lName = req.body.lName;
 
-  var n = req.body.fName + req.body.lName;
-  var l = n.length;
+  let name = fname+lName;
+   res.render('index.ejs', {
+    len : name.length,
+   })
 
-  res.render("index.ejs", {
-    len: l,
-  });
+})
 
-});
+
+
+
 
 
 app.listen(port, () => {
